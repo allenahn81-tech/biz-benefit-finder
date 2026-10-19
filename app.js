@@ -402,6 +402,12 @@
     } catch (e) { return false; }
   }
 
+  // 예시 입력값은 config.js 의 SITE_CONFIG.defaults 에서 읽는다.
+  function applyDefaults() {
+    const d = (window.SITE_CONFIG && window.SITE_CONFIG.defaults) || {};
+    for (const id in d) if ($(id)) $(id).value = d[id];
+  }
+
   function syncEntity() {
     const pre = $('entity').value === '예비창업자';
     $('age-field').hidden = pre;
@@ -411,25 +417,17 @@
   function init() {
     fillSelects();
     $('today').textContent = todayISO();
-    const n = Array.isArray(window.BENEFITS) ? window.BENEFITS.length : 0;
-    const sample = Array.isArray(window.BENEFITS) && window.BENEFITS.every((b) => String(b.title || '').startsWith('[샘플]'));
-    $('data-note').textContent = sample
+    const all = Array.isArray(window.BENEFITS) ? window.BENEFITS : [];
+    const n = all.length;
+    const s = all.filter((b) => String(b.title || '').startsWith('[샘플]')).length;
+    $('data-note').textContent = s === n && n > 0
       ? `지금은 샘플 공고 ${n}건으로 동작합니다. data/benefits.js를 수집기 출력으로 바꾸면 실제 공고로 검색됩니다.`
-      : `공고 ${n}건 기준`;
+      : s > 0
+        ? `공고 ${n}건 기준 (화면 확인용 샘플 ${s}건 포함)`
+        : `공고 ${n}건 기준`;
 
     const restored = restoreForm();
-    if (!restored) {
-      // 예시 입력값: 개인사업자 / 서울 종로구 / 정보통신업 / 소기업
-      $('entity').value = '개인';
-      $('age').value = '1~3년';
-      $('ksic').value = 'J';
-      $('ksic_full').value = '';
-      $('revenue').value = '';
-      $('employees').value = '';
-      $('region').value = '서울특별시';
-      $('district').value = '종로구';
-      $('tax').value = 'no';
-    }
+    if (!restored) applyDefaults();
     syncEntity();
 
     $('entity').addEventListener('change', syncEntity);

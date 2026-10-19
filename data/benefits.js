@@ -265,5 +265,33 @@ window.BENEFITS = [
     eligibility_text: "부산 소재 1년 이상 운영한 상시근로자 5인 이상 50인 이하 제조업 법인",
     how_to_apply: "보조금24에서 온라인 신청",
     url: "https://www.gov.kr"
+  },
+  {
+    benefit_id: "SAMPLE-008",
+    source: "지자체·지역 지원기관",
+    title: "[샘플] 영등포구 소상공인 점포 환경개선 지원",
+    summary: "간판·인테리어·위생설비 개선 비용의 80% 지원 (업체당 최대 300만원)",
+    target_entity_types: ["개인", "법인"],
+    min_business_age_months: 6,
+    max_business_age_months: null,
+    business_age_text: null,
+    target_ksic_codes: ["47", "56", "96"],
+    target_ksic_text: null,
+    max_revenue: 1000000000,
+    min_revenue: null,
+    max_employees: 5,
+    min_employees: null,
+    target_regions: ["서울특별시"],
+    target_districts: ["서울특별시 영등포구"],
+    target_region_text: null,
+    excludes_tax_delinquent: true,
+    self_funding_ratio: 20,
+    self_funding_text: null,
+    apply_start: "2026-10-12",
+    apply_end: "2026-11-20",
+    is_always_open: false,
+    eligibility_text: "영등포구에 사업장을 두고 6개월 이상 운영 중인 소매업·음식점업·개인서비스업 소상공인(상시근로자 5인 이하). 국세·지방세 체납자 제외",
+    how_to_apply: "영등포구청 누리집 온라인 신청 또는 구청 방문 접수",
+    url: "https://www.ydp.go.kr"
   }
 ];
